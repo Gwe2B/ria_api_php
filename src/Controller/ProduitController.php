@@ -87,5 +87,10 @@ class ProduitController {
         }
     }
 
-    public function getHisto(int $pdtId) {}
+    public function getHisto(int $pdtId) {
+        $mngr = \App\Manager\ProduitManager::getInstance($GLOBALS['pdo']);
+        $histo = $mngr->getHisto($pdtId);
+
+        HTTP::response(HTTP::CODE_2XX_SUCCESS, 'Success', $histo);
+    }
 }

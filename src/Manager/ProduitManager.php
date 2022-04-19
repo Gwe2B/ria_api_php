@@ -101,6 +101,9 @@ class ProduitManager {
         $stmt = $this->pdo->prepare('INSERT INTO produits(nom, description, prix) VALUE (?,?,?)');
         if($stmt->execute(array($pdt->getNom(), $pdt->getDescription(), $pdt->getPrix()))) {
             $result = $this->pdo->lastInsertId();
+
+            $stmt = $this->pdo->prepare('INSERT INTO evolutions(id_produit, prix) VALUES(?, ?)');
+            $stmt->execute(array($result, $pdt->getPrix()));
         }
 
         return $result;
@@ -124,6 +127,18 @@ class ProduitManager {
         $result = $stmt->execute(array($prix, $id, $id, $prix));
         $stmt->closeCursor();
 
+        return $result;
+    }
+
+    public function getHisto(int $id): array {
+        $result = [];
+
+        $stmt = $this->pdo->prepare('SELECT date_up, prix FROM evolutions WHERE id_produit = ?');
+        if($stmt->execute([$id])) {
+            $result = $stmt->fetchAll();
+        }
+
+        $stmt->closeCursor();
         return $result;
     }
 }
