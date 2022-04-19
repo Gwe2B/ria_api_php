@@ -17,16 +17,16 @@
 The response is under JSON format of the forms :
 ```json
 {
-  status: 200,
-  status_message: "Success",
-  data: [
+  "status": 200,
+  "status_message": "Success",
+  "data": [
     {
-      id: 1,
-      name: "pen",
-      description: "",
-      price: 15,
-      dateIn: "2019-05-23 16:06",
-      dateUp: "2019-05-23 16:06"
+      "id": 1,
+      "name": "pen",
+      "description": "",
+      "price": 15,
+      "dateIn": "2019-05-23 16:06",
+      "dateUp": "2019-05-23 16:06"
     },
     ...
   ]
